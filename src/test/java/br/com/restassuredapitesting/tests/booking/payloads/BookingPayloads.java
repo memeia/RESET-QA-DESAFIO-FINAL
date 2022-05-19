@@ -15,7 +15,7 @@ public class BookingPayloads {
         payload.put("totalprice", 111);
         payload.put("depositpaid", true);
         payload.put("bookingdates", bookingdates);
-        payload.put("addiotnalneeds", "breakfast");
+        payload.put("additionalneeds", "breakfast");
 
         return payload;
 
