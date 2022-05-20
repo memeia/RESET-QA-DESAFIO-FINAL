@@ -3,7 +3,6 @@ package br.com.restassuredapitesting.tests.booking.tests;
 import br.com.restassuredapitesting.base.BaseTest;
 import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.ContractTests;
-import br.com.restassuredapitesting.tests.booking.requests.GetBookingRequest;
 import br.com.restassuredapitesting.tests.booking.requests.PostBookingRequest;
 import br.com.restassuredapitesting.utils.Utils;
 import io.qameta.allure.Feature;
@@ -31,6 +30,6 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.createBooking()
                 .then()
                 .statusCode(200)
-                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","booking"))));
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","newBooking"))));
     }
 }

@@ -4,6 +4,7 @@ import br.com.restassuredapitesting.base.BaseTest;
 import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.ContractTests;
 import br.com.restassuredapitesting.tests.booking.requests.GetBookingRequest;
+import br.com.restassuredapitesting.tests.booking.requests.PostBookingRequest;
 import br.com.restassuredapitesting.utils.Utils;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -20,6 +21,8 @@ import static org.hamcrest.Matchers.greaterThan;
 @Feature("Feature - Retorno de Reservas")
 public class GetBookingTest extends BaseTest {
     GetBookingRequest getBookingRequest = new GetBookingRequest();
+    PostBookingRequest postBookingRequest = new PostBookingRequest();
+
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
@@ -44,4 +47,27 @@ public class GetBookingTest extends BaseTest {
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","bookings"))));
     }
+
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, ContractTests.class})
+    @DisplayName("Garantir o schema de retorno de reserva especifica")
+    public void validaSchemaDeReservaEspecifica(){
+
+        int id = postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("bookingid");
+
+
+        getBookingRequest.bookingReturnId(id)
+           .then()
+           .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","booking"))));
+    }
+
+
+
 }

@@ -11,4 +11,11 @@ public class GetBookingRequest {
                 .get("booking");
 
     }
+
+    public Response bookingReturnId(int id){
+        return given()
+                .when()
+                .get("booking/"+id);
+
+    }
 }
