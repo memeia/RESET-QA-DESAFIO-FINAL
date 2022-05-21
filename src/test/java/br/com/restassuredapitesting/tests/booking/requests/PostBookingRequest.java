@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 public class PostBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
 
-    public Response createBooking(){
+    public Response createBooking() {
 
         return given()
                 .header("Content-Type", " application/json")
@@ -16,4 +16,16 @@ public class PostBookingRequest {
                 .body(bookingPayloads.payloadValidBooking().toString())
                 .post("booking");
     }
+
+
+    public Response createInvalidBooking() {
+
+        return given()
+                .header("Content-Type", " application/json")
+                .when()
+                .body(bookingPayloads.payloadInvalidBooking().toString())
+                .post("booking");
+    }
+
+
 }

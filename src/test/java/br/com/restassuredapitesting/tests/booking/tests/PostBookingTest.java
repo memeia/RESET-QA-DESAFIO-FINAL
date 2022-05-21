@@ -19,17 +19,60 @@ import static org.hamcrest.Matchers.greaterThan;
 
 @Feature("Feature - Criar Reservas")
 public class PostBookingTest extends BaseTest {
-   PostBookingRequest postBookingRequest = new PostBookingRequest();
+    PostBookingRequest postBookingRequest = new PostBookingRequest();
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, ContractTests.class})
     @DisplayName("Garantir o schema de retorno da reserva")
-    public void validaSchemaDaReserva(){
+    public void validaSchemaDaReserva() {
 
         postBookingRequest.createBooking()
                 .then()
                 .statusCode(200)
-                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","newBooking"))));
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "newBooking"))));
     }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, ContractTests.class})
+    @DisplayName("Garantir o schema de retorno da reserva invalida")
+    public void invalidaSchemaDaReserva() {
+
+        postBookingRequest.createInvalidBooking()
+                .then()
+                .statusCode(500);
+    }
+
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, ContractTests.class})
+    @DisplayName("Garantir o schema de retorno da reserva em Sequencia")
+    public void validaSchemaReservaSequencia() {
+
+        postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "newBooking"))));
+
+        postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "newBooking"))));
+    }
+
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, ContractTests.class})
+    @DisplayName("Garantir o schema de retorno mais Parametros")
+    public void parametrosSchemaDaReserva() {
+
+        postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "newBooking"))));
+    }
+
 }
