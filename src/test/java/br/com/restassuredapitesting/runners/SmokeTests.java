@@ -9,7 +9,6 @@ import org.junit.runners.Suite;
 @Categories.IncludeCategory(br.com.restassuredapitesting.suites.SmokeTests.class)
 @Suite.SuiteClasses({
         PostAuthTest.class,
-
 })
 
 public class SmokeTests {

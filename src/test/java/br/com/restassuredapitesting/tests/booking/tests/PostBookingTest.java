@@ -16,7 +16,6 @@ import org.junit.experimental.categories.Category;
 import java.io.File;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
-import static org.hamcrest.Matchers.greaterThan;
 
 @Feature("Feature - Criar Reservas")
 public class PostBookingTest extends BaseTest {
@@ -25,7 +24,7 @@ public class PostBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, ContractTests.class, AcceptanceTests.class})
-    @DisplayName("Garantir o schema de retorno da reserva")
+    @DisplayName("Criar uma nova reserva")
     public void validaSchemaDaReserva() {
 
         postBookingRequest.createBooking()
@@ -36,8 +35,8 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Garantir o schema de retorno da reserva invalida")
+    @Category({AllTests.class, AcceptanceTests.class})
+    @DisplayName("Criar Reserva com Payload Invalido")
     public void invalidaSchemaDaReserva() {
 
         postBookingRequest.createInvalidBooking()
@@ -48,9 +47,9 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Garantir o schema de retorno da reserva em Sequencia")
-    public void validaSchemaReservaSequencia() {
+    @Category({AllTests.class, AcceptanceTests.class})
+    @DisplayName("Validar Criação Mais de Uma reserva em Sequencia")
+    public void validaReservaSequencia() {
 
         postBookingRequest.createBooking()
                 .then()
@@ -66,11 +65,11 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Garantir o schema de retorno mais Parametros")
-    public void parametrosSchemaDaReserva() {
+    @Category({AllTests.class, AcceptanceTests.class})
+    @DisplayName("Criar Reserva com mais Parametros Payload")
+    public void maisParametrosPayload() {
 
-        postBookingRequest.createBooking()
+        postBookingRequest.createBookingMaisParametros()
                 .then()
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "newBooking"))));

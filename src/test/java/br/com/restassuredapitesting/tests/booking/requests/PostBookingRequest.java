@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
+
 public class PostBookingRequest {
     public BookingPayloads bookingPayloads = new BookingPayloads();
 
@@ -28,5 +29,12 @@ public class PostBookingRequest {
                 .post("booking");
     }
 
+    public Response createBookingMaisParametros() {
 
+        return given()
+                .header("Content-Type", " application/json")
+                .when()
+                .body(bookingPayloads.payloadMaisParametros().toString())
+                .post("booking");
+    }
 }

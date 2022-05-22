@@ -1,6 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
 import br.com.restassuredapitesting.base.BaseTest;
+import br.com.restassuredapitesting.runners.AcceptanceTests;
 import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.ContractTests;
 import br.com.restassuredapitesting.tests.booking.requests.GetBookingRequest;
@@ -14,7 +15,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
-import java.util.Map;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.greaterThan;
@@ -27,14 +27,13 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, AcceptanceTests.class})
     @DisplayName("Listar ids de reservas")
     public void validaListagemDeIdsDasReservas() {
         getBookingRequest.bookingReturnIds()
                 .then()
                 .statusCode(200)
                 .body("size()", greaterThan(8));
-
     }
 
     @Test
@@ -52,7 +51,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, ContractTests.class})
+    @Category({AllTests.class, ContractTests.class, AcceptanceTests.class})
     @DisplayName("Garantir o schema de retorno de reserva especifica")
     public void validaSchemaDeReservaEspecifica() {
 
@@ -69,10 +68,27 @@ public class GetBookingTest extends BaseTest {
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "booking"))));
     }
 
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, AcceptanceTests.class})
+    @DisplayName("Listar uma reserva especifica")
+    public void validaReservaEspecifica() {
+
+        int id = postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("bookingid");
+
+
+        getBookingRequest.bookingReturnId(id)
+                .then()
+                .statusCode(200);
+    }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, AcceptanceTests.class})
     @DisplayName("Listar reservas pelo firstname")
     public void listaReservaPeloFirstname() {
 
@@ -88,10 +104,27 @@ public class GetBookingTest extends BaseTest {
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
     }
 
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, AcceptanceTests.class})
+    @DisplayName("Listar reservas pelo lastname")
+    public void listaReservaPeloLastname() {
+
+        String lastname = postBookingRequest.createBooking()
+                .then()
+                .statusCode(200)
+                .extract()
+                .path("booking.lastname");
+
+        getBookingRequest.filterByLastName(lastname)
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
+    }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, AcceptanceTests.class})
     @DisplayName("Listar reservas pela Data de Checkin")
     public void listaReservaPelaDataDeCheckin() {
 
@@ -110,7 +143,7 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, AcceptanceTests.class})
     @DisplayName("Listar reservas pela Data de Checkout")
     public void listaReservaPelaDataDeCheckout() {
 
@@ -126,47 +159,47 @@ public class GetBookingTest extends BaseTest {
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
     }
 
+//    @Test
+//    @Severity(SeverityLevel.BLOCKER)
+//    @Category({AllTests.class})
+//    @DisplayName("Listar reservas pela Data de Checkin e Checkout")
+//    public void listaReservaPelaDataDeCheckinCheckout() {
+//
+//        postBookingRequest.createBooking()
+//                .then()
+//                .statusCode(200)
+//                .extract()
+//                .path("booking.bookingdates");
+//
+//        getBookingRequest.filterByDateCheckout()
+//                .then()
+//                .statusCode(200)
+//                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
+//    }
+//
+//
+//    @Test
+//    @Severity(SeverityLevel.BLOCKER)
+//    @Category({AllTests.class})
+//    @DisplayName("Listar reservas pelo Nome Completo, Data de Checkin e Checkout")
+//    public void listaReservaPeloNomeCompletoDataDeCheckinCheckout() {
+//
+//        postBookingRequest.createBooking()
+//                .then()
+//                .statusCode(200)
+//                .extract()
+//                .path("booking.bookingdates");
+//
+//        getBookingRequest.filterByDateCheckout()
+//                .then()
+//                .statusCode(200)
+//                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
+//    }
+
+
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Listar reservas pela Data de Checkin e Checkout")
-    public void listaReservaPelaDataDeCheckinCheckout() {
-
-        //    postBookingRequest.createBooking()
-        //   .then()
-        //  .statusCode(200)
-        //   .extract()
-        ///   .path("booking.bookingdates");
-
-        // getBookingRequest.filterByDateCheckout()
-        //    .then()
-        //.statusCode(200)
-        //.body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
-    }
-
-
-    @Test
-    @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Listar reservas pelo Nome Completo, Data de Checkin e Checkout")
-    public void listaReservaPeloNomeCompletoDataDeCheckinCheckout() {
-
-        postBookingRequest.createBooking()
-                .then()
-                .statusCode(200)
-                .extract()
-                .path("booking.bookingdates");
-
-        // getBookingRequest.filterByDateCheckout()
-        //      .then()
-        //     .statusCode(200)
-        //   .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
-    }
-
-
-    @Test
-    @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, AcceptanceTests.class})
     @DisplayName("Fazer consulta de reservas enviando filtro mal formatado ")
     public void filtroDataMalFormatado() {
 

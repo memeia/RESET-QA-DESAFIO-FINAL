@@ -6,9 +6,9 @@ import static io.restassured.RestAssured.given;
 
 public class GetPingRequest {
 
-    public Response pingReturnApi(){
+    public Response pingReturnApi() {
         return given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .when()
                 .get("ping");
 

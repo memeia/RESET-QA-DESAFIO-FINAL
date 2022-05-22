@@ -56,6 +56,4 @@ public class GetBookingRequest {
                 .when()
                 .get("booking?firstname=" + firstname + "booking?lastname=" + lastname + "booking?checkin=" + datein + "&checkout=" + dateout);
     }
-
-
 }

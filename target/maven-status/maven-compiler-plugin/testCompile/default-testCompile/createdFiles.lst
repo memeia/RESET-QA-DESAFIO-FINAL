@@ -7,7 +7,6 @@ br\com\restassuredapitesting\runners\AllTests.class
 br\com\restassuredapitesting\tests\ping\tests\GetPingTest.class
 br\com\restassuredapitesting\tests\auth\request\PostAuthRequest.class
 br\com\restassuredapitesting\tests\booking\tests\PostBookingTest.class
-br\com\restassuredapitesting\runners\SecutrityTests.class
 br\com\restassuredapitesting\suites\AllTests.class
 br\com\restassuredapitesting\runners\ContractTests.class
 br\com\restassuredapitesting\tests\auth\request\payload\AuthPayloads.class
@@ -22,5 +21,6 @@ br\com\restassuredapitesting\tests\booking\payloads\BookingPayloads.class
 br\com\restassuredapitesting\runners\AcceptanceTests.class
 br\com\restassuredapitesting\base\BaseTest.class
 br\com\restassuredapitesting\suites\AcceptanceTests.class
+br\com\restassuredapitesting\runners\SecurityTests.class
 br\com\restassuredapitesting\tests\booking\requests\PutBookingRequest.class
 br\com\restassuredapitesting\tests\booking\tests\DeleteBookingTest.class

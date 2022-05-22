@@ -18,7 +18,6 @@ public class BookingPayloads {
         payload.put("additionalneeds", "breakfast");
 
         return payload;
-
     }
 
 
@@ -37,7 +36,6 @@ public class BookingPayloads {
         payload.put("additionalneeds", "breakfast");
 
         return payload;
-
     }
 
 
@@ -57,8 +55,5 @@ public class BookingPayloads {
         payload.put("numberHosts", 3);
 
         return payload;
-
     }
-
-
 }
