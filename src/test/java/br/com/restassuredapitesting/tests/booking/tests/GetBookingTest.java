@@ -4,6 +4,7 @@ import br.com.restassuredapitesting.base.BaseTest;
 import br.com.restassuredapitesting.runners.AcceptanceTests;
 import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.ContractTests;
+import br.com.restassuredapitesting.tests.booking.payloads.BookingPayloads;
 import br.com.restassuredapitesting.tests.booking.requests.GetBookingRequest;
 import br.com.restassuredapitesting.tests.booking.requests.PostBookingRequest;
 import br.com.restassuredapitesting.utils.Utils;
@@ -11,6 +12,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -159,42 +161,44 @@ public class GetBookingTest extends BaseTest {
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
     }
 
-//    @Test
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Category({AllTests.class})
-//    @DisplayName("Listar reservas pela Data de Checkin e Checkout")
-//    public void listaReservaPelaDataDeCheckinCheckout() {
-//
-//        postBookingRequest.createBooking()
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .path("booking.bookingdates");
-//
-//        getBookingRequest.filterByDateCheckout()
-//                .then()
-//                .statusCode(200)
-//                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
-//    }
-//
-//
-//    @Test
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Category({AllTests.class})
-//    @DisplayName("Listar reservas pelo Nome Completo, Data de Checkin e Checkout")
-//    public void listaReservaPeloNomeCompletoDataDeCheckinCheckout() {
-//
-//        postBookingRequest.createBooking()
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .path("booking.bookingdates");
-//
-//        getBookingRequest.filterByDateCheckout()
-//                .then()
-//                .statusCode(200)
-//                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
-//    }
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar reservas pela Data de Checkin e Checkout")
+    public void listaReservaPelaDataDeCheckinCheckout() {
+
+        postBookingRequest.createBooking()
+                .then()
+                .statusCode(200);
+
+
+        getBookingRequest.filterByDateCheckinAndCheckout("2018-01-01", "2018-01-02")
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
+    }
+
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar reservas pelo Nome Completo, Data de Checkin e Checkout")
+    public void listaReservaPeloNomeCompletoDataDeCheckinCheckout() {
+
+        postBookingRequest.createBooking()
+                .then()
+                .statusCode(200);
+
+        getBookingRequest.filterByFullNameDateCheckinAndCheckout(
+                        "Cristiano",
+                        "Ronaldo",
+                        "2018-01-01",
+                        "2018-01-02"
+                )
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking", "bookings"))));
+    }
 
 
     @Test

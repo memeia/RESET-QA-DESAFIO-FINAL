@@ -19,7 +19,6 @@ public class PostBookingRequest {
                 .post("booking");
     }
 
-
     public Response createInvalidBooking() {
 
         return given()
@@ -35,6 +34,15 @@ public class PostBookingRequest {
                 .header("Content-Type", " application/json")
                 .when()
                 .body(bookingPayloads.payloadMaisParametros().toString())
+                .post("booking");
+    }
+
+    public Response createBookingByPayload(String payload) {
+
+        return given()
+                .header("Content-Type", " application/json")
+                .when()
+                .body(payload)
                 .post("booking");
     }
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.restassuredapitesting.runners.AllTests
 -------------------------------------------------------------------------------
-Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.604 s - in br.com.restassuredapitesting.runners.AllTests
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 45.355 s - in br.com.restassuredapitesting.runners.AllTests
