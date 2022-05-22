@@ -1,6 +1,7 @@
 package br.com.restassuredapitesting.tests.booking.tests;
 
 import br.com.restassuredapitesting.base.BaseTest;
+import br.com.restassuredapitesting.runners.AcceptanceTests;
 import br.com.restassuredapitesting.suites.AllTests;
 import br.com.restassuredapitesting.suites.ContractTests;
 import br.com.restassuredapitesting.tests.booking.requests.PostBookingRequest;
@@ -23,7 +24,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, ContractTests.class})
+    @Category({AllTests.class, ContractTests.class, AcceptanceTests.class})
     @DisplayName("Garantir o schema de retorno da reserva")
     public void validaSchemaDaReserva() {
 
@@ -35,7 +36,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, ContractTests.class})
+    @Category({AllTests.class})
     @DisplayName("Garantir o schema de retorno da reserva invalida")
     public void invalidaSchemaDaReserva() {
 
@@ -47,7 +48,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, ContractTests.class})
+    @Category({AllTests.class})
     @DisplayName("Garantir o schema de retorno da reserva em Sequencia")
     public void validaSchemaReservaSequencia() {
 
@@ -65,7 +66,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, ContractTests.class})
+    @Category({AllTests.class})
     @DisplayName("Garantir o schema de retorno mais Parametros")
     public void parametrosSchemaDaReserva() {
 
